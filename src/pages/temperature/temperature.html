@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-navbar>   
+    <ion-spinner #spinner [hidden]="!spinner_show" [paused]="!this.abc.scanning" (click)="this.abc.bt_discover()" style="float: right; margin-right: 1em; width: 1.5em; height: 1.5em;"></ion-spinner>
+    <span #tt42 [hidden]="spinner_show" style="float: right; margin-right: 1em;">{{temperature}}</span>
+
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Temperatures</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <div style="margin-bottom: 2em;">
+  The brew temperature is the normal setpoint of your <i>meCoffee</i> PID, always ready to brew a consistent shot. The default of 101 °C at the top of your boiler corresponds to about 92 °C at your brewhead for a Rancillio Silvia. If you prefer your espresso's darker, increase the setpoint. If you like your espresso's lighter and sweeter, decrease. <a target="_blank" href="https://en.wikipedia.org/wiki/De_gustibus_non_est_disputandum"><i>De gustibus non est disputandum</i></a>.
+
+  </div>
+
+   <div class="mecoffee item item-block item-md">    <div class="item-inner  mce-range">
+    <div style="flex: 1 0 0;" class="label label-md">Brew</div>
+    <div style="flex: 4 0 0;" class="item item-md">
+		<mc-range id="tmpsp" [(ngModel)]="pars.tmpsp" (ionChange)="notify($event)" min="50" max="125" step="0.1" unit="°" pin="true"></mc-range>
+      </div>
+   
+    </div></div>
+
+     <div style="margin-bottom: 2em;">
+     In addition to the brew temperature the Pro Active component is quite significant for the color and taste. The Pro Active feature increases the power to your boiler as soon as you enable your brew switch, anticipating a drop in temperature. The added power is measured in a percentage of your total boiler power. More is hotter &amp; darker, less is colder and sweeter.
+  </div>
+
+    <div class="mecoffee item item-block item-md">    <div class="item-inner  mce-range">
+    <div style="flex: 1 0 0;" class="label label-md">Pro Active</div>
+    <div style="flex: 4 0 0;" class="item item-md">
+		<mc-range id="tmppap" [(ngModel)]="pars.tmppap" (ionChange)="notify($event)" min="0" max="100" step="1" unit="%" pin="true"></mc-range>
+      </div>
+   
+    </div>
+    </div>
+
+  <div style="margin-bottom: 2em;">
+  The steam setpoint is reached by approaching it with the PID controller and switching to a narrow band on-off regulator onwards.
+  </div>
+
+    <div class="mecoffee item item-block item-md">    <div class="item-inner mce-range">
+    <div style="flex: 1 0 0;" class="label label-md">Steam</div>
+    <div style="flex: 4 0 0;" class="item item-md">
+    <mc-range id="tmpstm" [(ngModel)]="pars.tmpstm" (ionChange)="notify($event)" min="110" max="150" step="1" unit="°" pin="true"></mc-range>
+      </div>
+   
+    </div>
+    </div>
+
+
+ <div class="row" style="display: flex; flex-direction: row; align-items: center; width: 100%;">
+    <div style="flex: 1 0 0;">
+      <button ion-button id="defaults" [disabled]="!this.showDefaults()" (click)="doDefaults()">Defaults</button>
+    </div>
+    <div style="flex: 4 0 0;">
+    <div style="float:right;">
+    <button ion-button id="reset" [disabled]="!this.showUndo()"  (click)="doUndo()">Undo</button>
+    <button ion-button id="update" [disabled]="!this.showUpdate()" (click)="doUpdate()">Update</button>
+    </div>
+    </div>
+ </div>
+
+</ion-content>

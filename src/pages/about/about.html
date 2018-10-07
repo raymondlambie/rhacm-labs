@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>   
+    <ion-spinner #spinner [hidden]="!spinner_show" [paused]="!this.abc.scanning" (click)="this.abc.bt_discover()" style="float: right; margin-right: 1em; width: 1.5em; height: 1.5em;"></ion-spinner>
+    <span #tt42 [hidden]="spinner_show" style="float: right; margin-right: 1em;">{{temperature}}</span>
+
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>About</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <div style="margin-bottom: 2em;">
+  <i>meBarista</i> is the accompanying <i>App</i> to your <i>meCoffee</i> espresso controller. Control and monitor temperatures, PID, pressure, timer and preinfusion settings. Visit <i>meCoffee's</i> <a target="_blank" href="https://mecoffee.nl/">website</a> to learn more.
+	
+	</div>
+
+  <div>x{{this.abc.serial_result}}y</div>
+   <div style="position: absolute; bottom: 20%; left: 20%; right: 20%;">
+
+     <img style="width: 30vmin; height: 30vmin; display: block; margin-left: auto; margin-right: auto; " src="assets/icon/icon.png"/>
+
+     <div style="text-align: center;"><i>meBarista</i> 0.1.0</div>
+   </div>
+</ion-content>

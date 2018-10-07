@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>   
+    <ion-spinner #spinner [hidden]="!spinner_show" [paused]="!this.abc.scanning" (click)="this.abc.bt_discover()" style="float: right; margin-right: 1em; width: 1.5em; height: 1.5em;"></ion-spinner>
+    <span #tt42 [hidden]="spinner_show" style="float: right; margin-right: 1em;">{{temperature}}</span>
+
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Demos</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+<div style="margin-bottom: 2em;">
+  <p>
+  To see <i>meBarista</i> in action, it is possible to replay recorded meCoffee-sessions. This specific demo shows a warmup, a couple of warmup-shots ( ~ 3 seconds ) and an actual shot of about 25 seconds. Meanwhile <i>meBarista</i> acts like it is connected to an actual espresso-machine and it completely usable.
+  </p>
+
+  <p>
+  Demos run 10 times faster than actual time.
+  </p>
+
+</div>
+
+  <button ion-button id="demo"  (click)="doDemo()">Start demo</button>
+
+</ion-content>

@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-navbar>   
+    <ion-spinner #spinner [hidden]="!spinner_show" [paused]="!this.abc.scanning" (click)="this.abc.bt_discover()" style="float: right; margin-right: 1em; width: 1.5em; height: 1.5em;"></ion-spinner>
+    <span #tt42 [hidden]="spinner_show" style="float: right; margin-right: 1em;">{{temperature}}</span>
+
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Preinfusion</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+    <div style="margin-bottom: 2em;">Preinfusion lets you pause the pump for a while to <i>weld</i> the puck. Optionally, it is possible to keep the valve open during pausing.</div>
+
+  <div class="mecoffee item item-block item-md">    <div class="item-inner">
+    <div style="flex: 1 0 0;" class="label label-md">Enable</div>
+    <div style="flex: 4 0 0;" class="item item-md">
+    <ion-toggle id="pinbl" [(ngModel)]="pars.pinbl" (ionChange)="notify($event)"  style="float:right;"></ion-toggle>
+    </div>
+  </div></div>
+
+    <div style="margin-bottom: 2em;">The first stage of preinfusion is welding the puck. Configure how many seconds to run the pump to weld the puck.</div>
+
+
+    <div class="mecoffee item item-block item-md">    <div class="item-inner  mce-range">
+    <div style="flex: 1 0 0;" class="label label-md">Pump</div>
+    <div style="flex: 4 0 0;" class="item item-md">
+	<mc-range id="pistrt" [(ngModel)]="pars.pistrt" (ionChange)="notify($event)" min="2" max="10" step="0.1" unit="s" pin="true">
+    </mc-range>
+    </div>
+    </div></div>
+    
+      <div style="margin-bottom: 2em;">On machines with electrical valves, configure to operate the valve during welding or leave it open.</div>
+
+    <div class="mecoffee item item-block item-md">    <div class="item-inner">
+    <div style="flex: 1 0 0;" class="label label-md">Close valve</div>
+    <div style="flex: 4 0 0;" class="item item-md">
+    <ion-toggle id="pivlv"  [(ngModel)]="pars.pivlv" (ionChange)="notify($event)" style="float:right;"></ion-toggle>
+    </div>
+  </div></div>
+
+  <div style="margin-bottom: 2em;">Configure the time to leave the puck welding.</div>
+
+  <div class="mecoffee item item-block item-md">    <div class="item-inner mce-range">
+    <div style="flex: 1 0 0;" class="label label-md">Weld</div>
+    <div style="flex: 4 0 0;" class="item item-md">
+	<mc-range id="piprd" [(ngModel)]="pars.piprd" (ionChange)="notify($event)" min="2" max="10" step="0.1" unit="s" pin="true">
+    </mc-range>
+    </div>
+    </div></div>
+	
+   <div class="row" style="display: flex; flex-direction: row; align-items: center; width: 100%;">
+    <div style="flex: 1 0 0;">
+      <button ion-button id="defaults" [disabled]="!this.showDefaults()" (click)="doDefaults()">Defaults</button>
+    </div>
+    <div style="flex: 4 0 0;">
+    <div style="float:right;">
+    <button ion-button id="reset" [disabled]="!this.showUndo()"  (click)="doUndo()">Undo</button>
+    <button ion-button id="update" [disabled]="!this.showUpdate()" (click)="doUpdate()">Update</button>
+    </div>
+    </div>
+ </div>
+
+</ion-content>

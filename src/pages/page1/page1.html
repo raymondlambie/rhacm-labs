@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>   
+    <ion-spinner #spinner [hidden]="!spinner_show" [paused]="!this.abc.scanning" (click)="this.abc.bt_discover()" style="float: right; margin-right: 1em; width: 1.5em; height: 1.5em;"></ion-spinner>
+    <span #tt42 [hidden]="spinner_show" style="float: right; margin-right: 1em;">{{temperature}}</span>
+
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>meBarista</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content #content (window:orientationchange)="changeOrientation($event)">
+   
+    <canvas #lineCanvas></canvas>
+
+      <div id="cpuSpeed" #cpuSpeed class="gauge-container two" style="position: absolute; width: 30vw; height: 15vw; left: 10vmin; bottom: 10vmin; "></div>
+     
+
+   <div id="cpuSpeed2" #cpuSpeed2 class="gauge-container two" [hidden]="!shottimer_show" style="position:absolute; width: 30vw; height: 15vw; right: 10vmin; bottom: 10vmin;"></div>
+
+</ion-content>

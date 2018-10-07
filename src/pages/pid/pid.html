@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-navbar>   
+    <ion-spinner #spinner [hidden]="!spinner_show" [paused]="!this.abc.scanning" (click)="this.abc.bt_discover()" style="float: right; margin-right: 1em; width: 1.5em; height: 1.5em;"></ion-spinner>
+    <span #tt42 [hidden]="spinner_show" style="float: right; margin-right: 1em;">{{temperature}}</span>
+
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>PID</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <div style="margin-bottom: 2em;">
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+	</div>
+
+	<div class="mecoffee item item-block item-md">    <div class="item-inner  mce-range">
+    <div style="flex: 1 0 0;" class="label label-md">Propotional P</div>
+    <div style="flex: 4 0 0;" class="item item-md">
+	<mc-range id="pd1p" [(ngModel)]="pars.pd1p" (ionChange)="notify($event)" min="0" max="50" unit="" pin="true">
+    </mc-range>
+    </div>
+    </div>
+    </div>
+
+    <div class="mecoffee item item-block item-md">    <div class="item-inner  mce-range">
+    <div style="flex: 1 0 0;" class="label label-md">Integral I</div>
+    <div style="flex: 4 0 0;" class="item item-md">
+	<mc-range id="pd1i" [(ngModel)]="pars.pd1i" (ionChange)="notify($event)" min="0" max="10" unit="" step="0.1" pin="true">
+    </mc-range>
+    </div>
+    </div>
+    </div>
+
+    <div class="mecoffee item item-block item-md">    <div class="item-inner mce-range">
+    <div style="flex: 1 0 0;" class="label label-md">Derivative I</div>
+    <div style="flex: 4 0 0;" class="item item-md">
+	<mc-range id="pd1d" [(ngModel)]="pars.pd1d" (ionChange)="notify($event)" min="0" max="300" unit="" pin="true">
+    </mc-range>
+    </div>
+    </div>
+    </div>
+
+    <div class="mecoffee item item-block item-md">    <div class="item-inner mce-range">
+    <div style="flex: 1 0 0;" class="label label-md">Maximum I</div>
+    <div style="flex: 4 0 0;" class="item item-md">
+	<mc-range id="pd1imx" [(ngModel)]="pars.pd1imx" (ionChange)="notify($event)" min="0" max="100" unit="%" pin="true">
+    </mc-range>
+    </div>
+    </div>
+    </div>
+
+
+ <div class="row" style="display: flex; flex-direction: row; align-items: center; width: 100%;">
+    <div style="flex: 1 0 0;">
+      <button ion-button id="defaults" [disabled]="!this.showDefaults()" (click)="doDefaults()">Defaults</button>
+    </div>
+    <div style="flex: 4 0 0;">
+    <div style="float:right;">
+    <button ion-button id="reset" [disabled]="!this.showUndo()"  (click)="doUndo()">Undo</button>
+    <button ion-button id="update" [disabled]="!this.showUpdate()" (click)="doUpdate()">Update</button>
+    </div>
+    </div>
+ </div>
+
+</ion-content>

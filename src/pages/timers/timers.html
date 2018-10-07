@@ -1,0 +1,126 @@
+<ion-header>
+  <ion-navbar>   
+    <ion-spinner #spinner [hidden]="!spinner_show" [paused]="!this.abc.scanning" (click)="this.abc.bt_discover()" style="float: right; margin-right: 1em; width: 1.5em; height: 1.5em;"></ion-spinner>
+    <span #tt42 [hidden]="spinner_show" style="float: right; margin-right: 1em;">{{temperature}}</span>
+
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Timers</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <div style="margin-bottom: 2em;">
+  The inactivity timer disables the boiler and puts your machine into the off-state when no brew or steam activity has been detected for the configured number of minutes. Set to zero to disable.
+	</div>
+
+<!-- style="display: flex; flex-direction: row; align-items: center; width: 100%; margin-bottom: 2em;"  -->
+
+	  <div class="mecoffee item item-block item-md">
+    <div class="item-inner mce-range">
+    <div style="flex: 1 0 0;" class="label label-md">Inactivity</div>
+    <div style="flex: 4 0 0;" class="item item-md" >
+
+	<mc-range id="tmrosd" [(ngModel)]="pars.tmrosd" (ionChange)="notify($event)" min="0" max="120" unit="min" pin="true">
+    </mc-range>
+  </div></div>
+  </div>
+
+
+  <div style="margin-bottom: 2em;">
+  The shot timer limits the shot time to the configured number of seconds. 
+  </div>
+
+    <div class="mecoffee item item-block item-md">
+    <div class="item-inner mce-range">
+    <div style="flex: 1 0 0;" class="label label-md">Shot</div>
+    <div style="flex: 4 0 0;" class="item item-md" >
+
+  <mc-range id="shtmx" [(ngModel)]="pars.shtmx" (ionChange)="notify($event)" min="0" max="60" unit="s" pin="true">
+    </mc-range>
+  </div></div>
+  </div>
+
+   <div style="margin-bottom: 2em;">
+  The wakeup timer enables automatic turn-on at the specified time. Irregardless of the inactivity timer configuration it will shut off again if no activity is detected within 60 minutes.  
+  </div>
+
+     <div class="mecoffee item item-block item-md">
+    <div class="item-inner">
+    <div style="flex: 1 0 0;" class="label label-md">Wakeup</div>
+    <div style="flex: 4 0 0;" class="item item-md">
+    <ion-toggle id="tmrwnbl" [(ngModel)]="pars.tmrwnbl" (ionChange)="notify($event)"  style="float:right;"></ion-toggle>
+    </div></div>
+    </div>
+
+
+    <!-- ion-item class="mecoffee">
+
+    <ion-label>Wakeup enable</ion-label>
+        <ion-toggle id="tmrwnbl" [(ngModel)]="pars.tmrwnbl" (ionChange)="notify($event)"  style="float:right;"></ion-toggle>
+    </ion-item -->
+
+         <div class="mecoffee item item-block item-md">
+    <div class="item-inner">
+    <div style="flex: 1 0 0;" class="label label-md">At</div>
+    <div style="flex: 4 0 0;" class="item item-md">
+          <ion-datetime id="tmron" [(ngModel)]="pars.tmron" displayFormat="h:mm A" pickerFormat="h mm A" style="float:right;"></ion-datetime>
+          </div></div></div>
+
+
+    <!-- ion-item class="mecoffee">
+    <ion-label>Wakeup time</ion-label>
+          <ion-datetime id="tmron" [(ngModel)]="pars.tmron" displayFormat="h:mm A" pickerFormat="h mm A" style="float:right;"></ion-datetime>
+    </ion-item -->
+
+    <!--ion-item class="mecoffee">
+
+    <ion-label>Shutdown enable</ion-label>
+    <ion-toggle id="tmrsnbl" [(ngModel)]="pars.tmrsnbl" (ionChange)="notify($event)"  style="float:right;"></ion-toggle>
+    </ion-item -->
+
+  <div style="margin-bottom: 2em;">
+  The shutdown timer enables automatic turn-off at the specified time. To turn on your machine again after this time, toggle the power switch of your machine.
+  </div>
+
+    <div class="mecoffee item item-block item-md">
+    <div class="item-inner">
+    <div style="flex: 1 0 0;" class="label label-md">Shutdown</div>
+    <div style="flex: 4 0 0;" class="item item-md">
+     <ion-toggle id="tmrsnbl" [(ngModel)]="pars.tmrsnbl" (ionChange)="notify($event)"  style="float:right;"></ion-toggle>
+     </div></div></div>
+
+
+    <!-- ion-item class="mecoffee">
+    <ion-label>Shutdown time</ion-label>
+      <ion-datetime id="tmroff" [(ngModel)]="pars.tmroff" displayFormat="h:mm A" pickerFormat="h mm A" style="float:right;"></ion-datetime>
+    </ion-item -->
+
+    <div class="mecoffee item item-block item-md">
+    <div class="item-inner">
+    <div style="flex: 1 0 0;" class="label label-md">At</div>
+     <div style="flex: 4 0 0;" class="item item-md">
+     <ion-datetime id="tmroff" [(ngModel)]="pars.tmroff" displayFormat="h:mm A" pickerFormat="h mm A" style="float:right;"></ion-datetime>
+     </div></div></div>
+
+     <div style="margin-bottom: 2em; color: grey;">
+      <b>Gotcha:</b> The wakeup and shutdown timer will cease to work after a power outage, or once unplugged from the wall-socket for that matter. Reconnect once with <i>meBarista</i> to tell your meCoffee the current time to re-enable.
+    </div>
+
+     <div class="row" style="display: flex; flex-direction: row; align-items: center; width: 100%;">
+    <div style="flex: 1 0 0;">
+      <button ion-button id="defaults" [disabled]="!this.showDefaults()" (click)="doDefaults()">Defaults</button>
+    </div>
+    <div style="flex: 4 0 0;">
+    <div style="float:right;">
+    <button ion-button id="reset" [disabled]="!this.showUndo()"  (click)="doUndo()">Undo</button>
+    <button ion-button id="update" [disabled]="!this.showUpdate()" (click)="doUpdate()">Update</button>
+    </div>
+    </div>
+ </div>
+ 
+
+</ion-content>

@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-navbar>   
+    <ion-spinner #spinner [hidden]="!spinner_show" [paused]="!this.abc.scanning" (click)="this.abc.bt_discover()" style="float: right; margin-right: 1em; width: 1.5em; height: 1.5em;"></ion-spinner>
+    <span #tt42 [hidden]="spinner_show" style="float: right; margin-right: 1em;">{{temperature}}</span>
+
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Pressure</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div style="margin-bottom: 2em;">
+  Pressure control allows you to taper the amount of power applied to your pump, thereby reducting pressure. Currently only a linear gradient has been implemented. First supply the required pressure at the start of the shot.
+	</div>
+
+    <div class="mecoffee item item-block item-md">    <div class="item-inner mce-range">
+    <div style="flex: 1 0 0;" class="label label-md">Start</div>
+    <div style="flex: 4 0 0;" class="item item-md">
+		<mc-range id="pp1" [(ngModel)]="pars.pp1" (ionChange)="notify($event)" min="0" max="100" step="1" unit="%" pin="true"></mc-range>
+      </div>
+   
+    </div>
+    </div>
+
+
+  <div style="margin-bottom: 2em;">
+  Supply the required pressure at the end of the shot.
+  </div>
+
+    <div class="mecoffee item item-block item-md">    <div class="item-inner mce-range">
+    <div style="flex: 1 0 0;" class="label label-md">End</div>
+    <div style="flex: 4 0 0;" class="item item-md">
+		<mc-range id="pp2" [(ngModel)]="pars.pp2" (ionChange)="notify($event)" min="0" max="100" step="1" unit="%" pin="true"></mc-range>
+      </div>
+   
+    </div>
+    </div>
+
+
+  <div style="margin-bottom: 2em;">
+Supply the required period for tapering from start to end.
+  </div>
+ 
+   <div class="mecoffee item item-block item-md">    <div class="item-inner mce-range">
+    <div style="flex: 1 0 0;" class="label label-md">Period</div>
+    <div style="flex: 4 0 0;" class="item item-md">
+    <mc-range id="ppt" [(ngModel)]="pars.ppt" (ionChange)="notify($event)" min="10" max="60" step="1" unit="s" pin="true"></mc-range>
+      </div>
+   
+    </div>
+    </div>
+
+
+   <div class="row" style="display: flex; flex-direction: row; align-items: center; width: 100%;">
+    <div style="flex: 1 0 0;">
+      <button ion-button id="defaults" [disabled]="!this.showDefaults()" (click)="doDefaults()">Defaults</button>
+    </div>
+    <div style="flex: 4 0 0;">
+    <div style="float:right;">
+    <button ion-button id="reset" [disabled]="!this.showUndo()"  (click)="doUndo()">Undo</button>
+    <button ion-button id="update" [disabled]="!this.showUpdate()" (click)="doUpdate()">Update</button>
+    </div>
+    </div>
+ </div>
+
+
+</ion-content>
